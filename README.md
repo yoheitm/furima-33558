@@ -1,38 +1,41 @@
 ## users　テーブル
 
-| Column     | Type     | Options     |
-| ---------- | -------- | ----------- |
-| nickname   | string   | null: false |
-| email      | string   | null: false |
-| password   | password | null: false |
-| first_name | string   | null: false |
-| last_name  | string   | null: false |
-| birthday   | integer  | null: false |
+| Column          | Type     | Options     |
+| --------------- | -------- | ----------- |
+| nickname        | string   | null: false |
+| email           | string   | null: false |
+| password        | string   | null: false |
+| first_name      | string   | null: false |
+| last_name       | string   | null: false |
+| first_name_kana | string   | null: false |
+| last_name_kana  | string   | null: false |
+| birth_date      | date     | null: false |
 
 ### Association
 
 - has_many :items
 - has_many :comments
-- has_many :credit_address
+- has_many :address
 
 ## items テーブル
 
-| Column            | Type       | Options
-| ----------------- | ---------- | -------
-| name              | string     | null: false
-| describe          | text       | null: false
-| category          | string     | null: false
-| state             | string     | null: false
-| shipping_charges  | string     | null: false
-| shipping_area     | string     | null: false
-| days_to_ship      | string     | null: false
-| price             | integer    | null: false
-| user_id           | references | foreign_key: true
+| Column                 | Type       | Options           |
+| ---------------------- | ---------- | ----------------- |
+| item_name              | string     | null: false       |
+| item_info              | text       | null: false       |
+| item_category          | string     | null: false       |
+| item_state             | string     | null: false       |
+| item_shipping_charges  | string     | null: false       |
+| item_shipping_area     | date       | null: false       |
+| item_days_to_ship      | string     | null: false       |
+| item_price             | integer    | null: false       |
+| user_id                | references | foreign_key: true |
+| buyer_id               | references | foreign_key: true |
 
 ### Association
 
 - has_many   :comments
-- has_one    :credit_address
+- has_one    :user_address
 - belongs_to :user
 
 ## comments テーブル
@@ -48,14 +51,30 @@
 - belongs_to :user
 - belongs_to :item
 
-## credit_address
+## address
 
-| Column     | Type       | Option            |
-| ---------- | ---------- | ----------------- |
-| credit_id  | references | foreign_key: true |
-| address_id | references | foreign_key: true |
-| user_id    | references | foreign_key: true |
-| product_id | references | foreign_key: true |
+| Column       | Type       | Option      |
+| ------------ | ---------- | ----------- |
+| postcode     | integer    | null: false |
+| area         | date       | null: false |
+| city         | string     | null: false |
+| block        | string     | null: false |
+| building     | string     |             |
+| phone_number | integer    | null: false |
 
 ### Association
 
+- has_many  :buyers
+
+## buyers
+
+| Column     | Type       | Option            |
+| ---------- | ---------- | ----------------- |
+| user_id    | references | foreign_key: true |
+| address_id | references | foreign_key: true |
+
+### Association
+
+- belongs_to   :user
+- belongs_to   :address
+- has_one      :item
