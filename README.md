@@ -11,11 +11,11 @@
 
 ### Association
 
-- has_many :products
+- has_many :items
 - has_many :comments
 - has_many :credit_address
 
-## products テーブル
+## items テーブル
 
 | Column            | Type       | Options
 | ----------------- | ---------- | -------
@@ -46,7 +46,7 @@
 ### Association
 
 - belongs_to :user
-- belongs_to :product
+- belongs_to :item
 
 ## credit_address
 
