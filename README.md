@@ -44,7 +44,7 @@
 | ---------- | ---------- | ----------------- |
 | text       | text       | null: false       |
 | user_id    | references | foreign_key: true |
-| product_id | references | foreign_key: true |
+| item_id    | references | foreign_key: true |
 
 ### Association
 
