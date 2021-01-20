@@ -15,7 +15,7 @@
 
 - has_many :items
 - has_many :comments
-- has_many :address
+- has_many :buyers
 
 ## items テーブル
 
@@ -34,9 +34,9 @@
 
 ### Association
 
-- has_many   :comments
-- has_one    :user_address
-- belongs_to :user
+- has_many      :comments
+- belongs_to    :buyer
+- belongs_to    :user
 
 ## comments テーブル
 
