@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   belongs_to :ship_date
   belongs_to :state
 
-  validates :name, :info, :price, presence: true
-  validates :area_id, :category_id, :ship_base_id,
-    :ship_date_id, :state_id, numericality: { other_than: 1 }
+  validates :name, :info, :price, :image, presence: true
+  validates :area_id, :category_id, :ship_base_id,:ship_date_id,
+            :state_id, numericality: { other_than: 1 }
 end
