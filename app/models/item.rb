@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :ship_base
   belongs_to :ship_date
   belongs_to :state
+  has_one    :purchase
 
   validates :name, :info, :image, presence: true
   validates :area_id, :category_id, :ship_base_id, :ship_date_id,
