@@ -8,8 +8,9 @@ class PurchasesController < ApplicationController
     @user_purchase = UserPurchase.new(purchase_params)
     if @user_purchase.valid?
       @user_purchase.save
-      redirect_to action: :index
+      redirect_to root_path
     else
+      @item = Item.find(params[:item_id])
       render action: :new
     end
   end
