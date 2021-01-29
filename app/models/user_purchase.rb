@@ -1,6 +1,6 @@
 class UserPurchase
   include ActiveModel::Model
-  attr_accessor :postcode, :area_id, :city, :block, :building, :phone_number, :user_id, :item_id
+  attr_accessor :postcode, :area_id, :city, :block, :building, :phone_number, :user_id, :item_id, :token
 
   with_options presence: true do
     validates :postcode, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
@@ -9,6 +9,7 @@ class UserPurchase
     validates :block
     validates :user_id
     validates :item_id
+    validates :token
   end
 
   validates :area_id, numericality: { other_than: 1 }
