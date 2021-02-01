@@ -85,6 +85,11 @@ RSpec.describe UserPurchase, type: :model do
         @user_purchase.valid?
         expect(@user_purchase.errors.full_messages).to include('Phone number is invalid. Input half-width characters.')
       end
+      it '電話番号が英数混合では購入できないこと' do
+        @user_purchase.phone_number = '12345abcdef'
+        @user_purchase.valid?
+        expect(@user_purchase.errors.full_messages).to include('Phone number is invalid. Input half-width characters.')
+      end
       it '電話番号が12文字以上では購入できないこと' do
         @user_purchase.phone_number = '123456789101'
         @user_purchase.valid?
