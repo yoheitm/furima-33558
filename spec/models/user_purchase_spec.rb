@@ -26,7 +26,7 @@ RSpec.describe UserPurchase, type: :model do
         expect(@user_purchase.errors.full_messages).to include("Postcode can't be blank")
       end
       it '郵便番号にハイフンが含まれていないと購入できないこと' do
-        @user_purchase.postcode = 1_234_567
+        @user_purchase.postcode = '1234567'
         @user_purchase.valid?
         expect(@user_purchase.errors.full_messages).to include('Postcode is invalid. Include hyphen(-)')
       end
@@ -41,12 +41,12 @@ RSpec.describe UserPurchase, type: :model do
         expect(@user_purchase.errors.full_messages).to include('Postcode is invalid. Include hyphen(-)')
       end
       it '郵便番号が8文字以上では購入できないこと' do
-        @user_purchase.postcode = 123 - 45_678
+        @user_purchase.postcode = '123-45678'
         @user_purchase.valid?
         expect(@user_purchase.errors.full_messages).to include('Postcode is invalid. Include hyphen(-)')
       end
       it '郵便番号が6文字以下では購入できないこと' do
-        @user_purchase.postcode = 123 - 456
+        @user_purchase.postcode = '123-456'
         @user_purchase.valid?
         expect(@user_purchase.errors.full_messages).to include('Postcode is invalid. Include hyphen(-)')
       end
@@ -86,7 +86,7 @@ RSpec.describe UserPurchase, type: :model do
         expect(@user_purchase.errors.full_messages).to include('Phone number is invalid. Input half-width characters.')
       end
       it '電話番号が12文字以上では購入できないこと' do
-        @user_purchase.phone_number = 123_456_789_101
+        @user_purchase.phone_number = '123456789101'
         @user_purchase.valid?
         expect(@user_purchase.errors.full_messages).to include('Phone number is invalid. Input half-width characters.')
       end
@@ -94,6 +94,16 @@ RSpec.describe UserPurchase, type: :model do
         @user_purchase.token = nil
         @user_purchase.valid?
         expect(@user_purchase.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'user_idが空では購入できないこと' do
+        @user_purchase.user_id = nil
+        @user_purchase.valid?
+        expect(@user_purchase.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空では購入できないこと' do
+        @user_purchase.item_id = nil
+        @user_purchase.valid?
+        expect(@user_purchase.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
